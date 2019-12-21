@@ -1,0 +1,40 @@
+style.
+  .loginform{
+  text-align:center;
+  margin-left:500px;
+  margin-right:500px;
+  margin-top:150px;
+  background-color:#f2f2f2;
+  z-index:9;
+  }
+
+  input:focus{
+  border-width:3px;
+  border-color:#ff4d4d;
+  outline:none;
+  }
+
+
+  a{
+  text-decoration:none;
+  }
+  a:hover{
+  font-size:150%;
+  }
+
+include header
+h3(style="text-align:left; color:red;")=title
+
+form(method='POST' action='/loginconfirm')
+  div.loginform
+    h1 Login
+    br
+    h3(style="text-align:left;padding: 0px 20px;") Email:     
+      input#email.form-control(type='email',name='email',placeholder="Enter Email",maxlength="30",autocomplete="email",required)
+
+    h3(style="text-align:left;padding: 0px 20px;") Password:
+      input#pw.form-control(type='password',name='password',maxlength="20",placeholder="Enter Password",autocomplete="password",required)
+
+    button.btn.btn-primary(type='submit' style="background-color:#98e698; width:80%;font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#28a428'" onmouseout="this.style.backgroundColor='#98e698';") Login
+    p Don't have an Account?  
+      a(href="/signup") Sign Up now!

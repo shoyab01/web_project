@@ -1,0 +1,33 @@
+var check=function()
+{
+	if(document.getElementById('new-password').value.length !==0 && document.getElementById('confirmpassword').value.length !== 0)
+	{
+		if (document.getElementById('new-password').value === document.getElementById('confirmpassword').value) 
+		{
+			if(document.getElementById('uname').value.length > 2 && document.getElementById('uname').value.length <=10)
+			{
+        		document.getElementById('submit').disabled = false;
+			}
+    		else
+    		{
+        		document.getElementById('submit').disabled = true;
+    		}
+    	}
+	}
+    else
+    {
+    	document.getElementById('submit').disabled = true;
+    }
+}
+
+var check1=function()
+{
+	if(document.getElementById('new-password').value.length >=8 && document.getElementById('new-password').value.length<=20)
+	{
+		document.getElementById('confirmpassword').disabled=false;
+	}
+	else
+	{
+		document.getElementById('confirmpassword').disabled=true;	
+	}
+}

@@ -1,0 +1,57 @@
+style.
+  .askquestion{
+  text-align:center;
+  background-color:#ccfff5;
+  padding:1px;
+  margin-left:250px;
+  margin-right:250px;
+  }
+
+  .postquestionbutton{
+  text-align:center;
+  }
+
+  .title{
+  text-align:left;
+  padding :0px 40px;
+  }
+  
+  .body{
+  text-align:left;
+  padding :0px 40px;
+  }
+
+  input:focus {
+  border-width:3px;
+  border-color:#ff4d4d;
+  outline:none;
+  }
+  textarea:focus {
+  border-width:3px;
+  border-color:#ff4d4d;
+  outline:none;
+  }
+
+include header
+
+form(method='POST' action='/questionforum/postquestion')
+  div.askquestion
+    h1 Ask a public question
+    div.title
+      h3 Title 
+      p Be specific and imagine you're asking a question to another person
+        input(type="text" id="title" name="title" size="100" maxlength="100" tabindex="100" value=titleAsk data-min-length="15" data-max-length="150"  autocomplete="off", required)
+
+    br
+
+    div.body
+      h3 Body
+      p Include all the information someone would need to answer your question
+        textarea(type="text" id="body" name="body" style="height: 200px" rows="1" cols="100" autocomplete="off", required) #{bodyAsk}
+         
+  div.postquestionbutton
+    input(type='submit',name="postques",value='Post Question',id="postques" style="background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")
+
+div.signout  
+  a(href="/logout")
+    button(type="button") Sign Out

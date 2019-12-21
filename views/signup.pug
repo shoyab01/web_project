@@ -1,0 +1,47 @@
+style.
+  .signupform{
+  text-align:center;
+  margin-left:450px;
+  margin-right:450px;
+  margin-top:150px;
+  background-color:#f2f2f2;
+  z-index:9;  
+  }
+
+  input:focus{
+  border-width:3px;
+  border-color:#ff4d4d;
+  outline:none;
+  }
+
+include header  
+h3(style="text-align:left; color:red;")=title      
+form(method='POST' action='/enterdata')
+           
+  div.signupform
+    h1(style="cursor:context-menu;") Sign Up 
+    div.emailsignup
+      h3(style="text-align:left;padding: 0px 20px;") Email:
+        input#email.form-control(type='email',name='email',placeholder="Enter Email",autocomplete='email',required)
+          
+    div.usernamesignup
+      h3(style="text-align:left;padding: 0px 20px;") User Name:
+        input(type:'text' name='username',placeholder="Enter User Name", autocomplete='username' maxlength="10" id='uname' onkeyup='check();', required)
+   
+    div.newpassowrdsignup  
+      h3(style="text-align:left;padding: 0px 20px;") New Password:
+        input(type="password" name="password", placeholder="Enter New Password", autocomplete="new-password" maxlength="20" id="new-password" onkeyup='check(),check1();',required)
+  
+    div.confirmpasswordsignup
+      h3(style="text-align:left;padding: 0px 20px;") Confirm Password:
+        input(type="password" name="confirmpassword", placeholder="Enter Confirm Password", autocomplete="confirmpassword" maxlength="20" id="confirmpassword" onkeyup='check();',required disabled)
+
+    br
+
+    input(type='submit',name="submit",value='submit',id="submit" style="background-color:#98e698; width:80%;font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#28a428'" onmouseout="this.style.backgroundColor='#98e698';" disabled)
+          
+  script
+    include ../public/javascripts/check.js
+
+p(style="color:red;") *Note: Password must contain atleast 8 characters and atmost 20 characters 
+p(style="color:red;") Username must contain atleast 3 characters and atmost 10 characters and must be unique      

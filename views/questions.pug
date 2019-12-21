@@ -1,0 +1,36 @@
+style.
+  .questionforum{
+  background-color:#fff8dc;
+  border-left-style:solid;
+  border-color:#c2c2a3;
+  border-width:0.5px;
+  }
+  
+  .question{
+  //background-color:#fff8dc;
+  opacity:0.8;
+  cursor:context-menu;
+  border-bottom-style:solid;
+  border-color:#c2c2a3;
+  border-width:0.5px;
+  }
+
+  .question a{
+  text-decoration:none;
+  font-family:serif;
+  font-size:20px;
+  color:#1a1aff;
+  }
+
+  .questionforum .question a:hover{
+  color:#4d79ff;
+  }
+
+
+include header
+
+div.questionforum
+  -for(var i = data.length-1; i >= 0; i-- )
+    -var url=String(data[i]["title"])
+    div.question 
+      p: p(style="text-align:center; overflow:auto;word-wrap: break-word;") #[a(href="/questionforum/question_info/"+(i+1)) #{url}]

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var sql = require('mysql');
 var session = require('express-session');
-var sanitizer = require('sanitizer');
 const bodyParser = require('body-parser');
 
 

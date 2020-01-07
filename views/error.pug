@@ -1,32 +1,57 @@
-style.
-  .goback{
-  text-align:center;
-  margin:50px;
-  }
+//style.
+//  .goback{
+//  text-align:center;
+//  margin:50px;
+//  }
 
-  .goback:hover{
-  text-decoration:underline;
-  }
+//  .goback:hover{
+//  text-decoration:underline;
+//  }
 
-  .fuckoff{
-  text-align:center;
-  }
+//  .fuckoff{
+//  text-align:center;
+//  }
 
-include header
+//include header
 
 //h1= message
 //h2= error.status
 //pre #{error.stack}
 
-h1(style="text-align:center;") FUCK OFF 
-div.fuckoff
-  img(src='http://localhost:3000/images/middlefin.png' alt='Fuck off symbol' width="300" height="300")
+//h1(style="text-align:center;") FUCK OFF 
+//div.fuckoff
+//  img(src='http://localhost:3000/images/middlefin.png' alt='Fuck off symbol' width="300" height="300")
 
 //This page isn't available
 //h4(style="text-align:center;") The link you followed may be broken, or the page may have been removed.
 
+//div.goback
+//  a(href="#" onclick="history.back();" style="text-decoration:none;") Go back to previous page
+
+
+
+style.
+  .goback{
+  text-align:center;
+  margin:250px;
+  }
+
+  .goback:hover{
+  text-decoration:underline;
+  }
+  .error{
+  margin-top:230px;
+  }
+
+- var logoutbtnable = loglog
+include header
+
+//h1= message
+//h2= error.status
+//pre #{error.stack}
+div.error
+  h1(style="text-align:center;") This page isn't available
+  h4(style="text-align:center;") The link you followed may be broken, or the page may have been removed.
+
 div.goback
   a(href="#" onclick="history.back();" style="text-decoration:none;") Go back to previous page
-
-
-

@@ -3,8 +3,9 @@ style.
   text-align:center;
   background-color:#eeccff;
   padding:1px;
-  margin-left:150px;
-  margin-right:150px;
+  margin-left:90px;
+  margin-right:90px;
+  margin-top:180px;
   }
 
   .question{
@@ -33,19 +34,25 @@ style.
   }
 
 
+- var logoutbtnable = loglog
 include header
 
 form(method='POST' action="/questionforum/question_info/postanswer/" + data3)
 
   div.questiontitle
     h1(style="overflow-x:auto;overflow-y:auto;word-wrap: break-word;")=title
-    p(style="text-align:right;") Asked By: #{String(data1[0]["username"])}
+    -var qqdate = String(data1[0]["qdate"]).slice(4,15);
+    -var qqtime = String(data1[0]["qdate"]).slice(16,21);
+    p(style="text-align:right;color:#737373;font-size:small;") #{qqdate} at #{qqtime}
+    p(style="text-align:right;color:#737373;font-size:small;") #{String(data1[0]["username"])}
+    
     div.question
       p(style="text-align:left;padding:0px 25px; overflow-x:auto; overflow-y:auto;word-wrap: break-word;") #{String(data1[0]["question"])}
+
     
     br
     br
-
+  
     -if(data2.length !== 0)
       -if(data2.length === 1)
         h2(style="text-align:left; border-bottom-style:solid; border-color:#c2c2a3; border-width:0.5px; margin-left:50px; margin-right:50px;") 1 Answer
@@ -54,7 +61,10 @@ form(method='POST' action="/questionforum/question_info/postanswer/" + data3)
       -for(var i = data2.length-1; i >= 0; i--)
         div.availableanswers
           p(style="text-align:left; padding:0px 10px;word-wrap: break-word;") #{data2[i]["answer"]}
-          p(style="text-align:right;") -- #{data2[i]["username"]}   
+          -var aadate = String(data2[i]["adate"]).slice(4,15);
+          -var aatime = String(data2[i]["adate"]).slice(16,21);
+          p(style="text-align:right;color:#737373;font-size:small;") #{aadate} at #{aatime}
+          p(style="text-align:right;color:#737373;font-size:small;") #{data2[i]["username"]}   
     -else
       p Be the first to answer this question
     h3(style="text-align:left;margin-left:50px; margin-right:50px;") Your Answer :
@@ -65,5 +75,3 @@ form(method='POST' action="/questionforum/question_info/postanswer/" + data3)
     br
   div.postyouranswerbutton
     input(type='submit',name="answerbodysubmit",value='Post Your Answer',id="answerbodysubmit" style="background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")
-
-  br

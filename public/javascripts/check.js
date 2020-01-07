@@ -4,7 +4,7 @@ var check=function()
 	{
 		if (document.getElementById('new-password').value === document.getElementById('confirmpassword').value) 
 		{
-			if(document.getElementById('uname').value.length > 2 && document.getElementById('uname').value.length <=10)
+			if(document.getElementById('uname').value.length > 3 && document.getElementById('uname').value.length <=20)
 			{
         		document.getElementById('submit').disabled = false;
 			}
@@ -31,3 +31,4 @@ var check1=function()
 		document.getElementById('confirmpassword').disabled=true;	
 	}
 }
+

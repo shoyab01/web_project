@@ -52,41 +52,42 @@ function refine(user_string)
 
 
 router.get('/questionforum/question_info/:qid',function(req,res,next){
-	conn.query(`select count(*) from questions`,function(err3,result3){
-		if(err3) throw err3;
-		if(req.params.qid<=result3[0]['count(*)'] && req.params.qid >=1)
+	conn.query(`select username,title,question,qdate from questions where question_id = '${req.params.qid}}'`,function(err1,result1){
+		if(err1) throw err1;
+		if(result1.length === 0)
 		{
-			conn.query(`select username,title,question from questions where question_id = '${req.params.qid}'`,function(err1,result1){
-				if(err1) throw err1;
-				conn.query(`select answer,username from answers where answer_id = '${req.params.qid}'`,function(err2,result2){
-					if(err2) throw err2;
-					req.session.anspage = req.params.qid;
-					var question_infoCombine = req.flash('loginConfirmData');
-
-					if(question_infoCombine.length !== 0)
-					{
-						var question_infoPostAnswer = question_infoCombine[0].answerbody;
-						res.render('question_info', {title:result1[0]["title"],data1: result1, data2:result2,data3:req.params.qid, PostAnswer:question_infoPostAnswer});
-
-					}
-					else
-					{
-						res.render('question_info', {title:result1[0]["title"],data1 : result1, data2 : result2, data3 : req.params.qid});	
-					}					
-				});
-		
-			});
+			res.render('error.pug',{loglog: req.session.uname});
 		}
 		else
 		{
-			res.render('error');
-		}
+			conn.query(`select answer,username,adate from answers where answer_id = ${req.params.qid}`,function(err2,result2){
+			    if(err2) throw err2;
+				req.session.anspage = req.params.qid;
+				req.session.askpage = undefined;
+				req.session.qfpage = undefined;
+				var question_infoCombine = req.flash('loginConfirmData');
+
+				if(question_infoCombine.length !== 0)
+				{
+					var question_infoPostAnswer = question_infoCombine[0].answerbody;
+					res.render('question_info', {title:result1[0]["title"],data1: result1, data2:result2,data3:req.params.qid, PostAnswer:question_infoPostAnswer, loglog: req.session.uname});
+
+				}
+				else
+				{
+					res.render('question_info', {title:result1[0]["title"],data1 : result1, data2 : result2, data3 : req.params.qid, loglog: req.session.uname});	
+				}					
+		    });
+	    }	
 	});
+
 });
 
 
 router.post('/questionforum/question_info/postanswer/:aid',checkSignIn,function(req,res,next){
-	conn.query(`insert into answers(answer_id,answer,username) values(${req.params.aid},'${refine(req.body.answerbody)}','${refine(req.session.uname)}')`,function(err,result){
+	req.session.askpage = undefined;
+	req.session.qfpage = undefined;
+	conn.query(`insert into answers(answer_id,answer,username,adate) values(${req.session.anspage},'${refine(req.body.answerbody)}','${refine(req.session.uname)}',now())`,function(err,result){
 		if(err) throw err;
 		res.redirect("/questionforum/question_info/"+ req.params.aid);
 	});
@@ -94,23 +95,28 @@ router.post('/questionforum/question_info/postanswer/:aid',checkSignIn,function(
 
 /* GET home page. */
 router.get('/',function(req, res, next){
-	res.render('startbutton');
+	res.render('startbutton',{loglog: req.session.uname});
 });
 
 
 
 router.get('/questionforum',function(req,res,next){
-	req.session.anspage = null;
-	conn.query(`select username,title,question from questions`,function(err,result){
+	req.session.anspage = undefined;
+	req.session.askpage = undefined;
+	req.session.qfpage = 1;
+	conn.query(`select title,question_id from questions`,function(err,result){
 		if(err) throw err;
-		res.render('questions', {data: result});
+		res.render('questions', {data: result, loglog: req.session.uname, loglog: req.session.uname});
 	});
 });
 
 
 
 router.post('/questionforum/postquestion',checkSignIn,function(req,res,next){
-	conn.query(`insert into questions (question,username,title) values ('${refine(req.body.body)}','${refine(req.session.uname)}','${refine(req.body.title)}')`,function(err,result){
+	req.session.askpage = 1;
+	req.session.anspage = undefined;
+	req.session.qfpage = undefined;
+	conn.query(`insert into questions (question,username,title,qdate) values ('${refine(req.body.body)}','${refine(req.session.uname)}','${refine(req.body.title)}',now())`,function(err,result){
 		if(err) throw err;
 		res.redirect('/questionforum');
 	});
@@ -121,17 +127,19 @@ router.post('/questionforum/postquestion',checkSignIn,function(req,res,next){
 
 
 router.get('/ask', function(req, res, next){
-	req.session.anspage = null;
+	req.session.anspage = undefined;
+	req.session.askpage = 1;
+	req.session.qfpage = undefined;
 	var askCombine = req.flash('loginConfirmData');
 	if(askCombine.length !== 0)
 	{
 		var askTitle = askCombine[0].title;
 		var askBody = askCombine[0].body;
-		res.render("ask",{titleAsk:askTitle, bodyAsk:askBody});	
+		res.render("ask",{titleAsk:askTitle, bodyAsk:askBody, loglog: req.session.uname});	
 	}
 	else
 	{
-		res.render("ask");
+		res.render("ask",{loglog: req.session.uname});
 	}
 });
 
@@ -144,14 +152,14 @@ router.get('/login',function(req, res, next){
 	}
 	else
 	{
-		res.render('login');
+		res.render('login',{loglog: req.session.uname});
 	}
 });
 
 
 
 router.get('/signup', function(req, res, next){
-		res.render('signup');
+		res.render('signup',{loglog: req.session.uname});
 });
 
 
@@ -163,7 +171,7 @@ router.post('/loginconfirm', function(req, res, next) {
 		if(err) throw err;
 		if(result.length===0)
 		{
-			res.render('login',{title:'*The email address that you have entered did not match any account in the Database.'});
+			res.render('login',{title:'*The email address that you have entered did not match any account in the Database.', loglog: req.session.uname});
 		}
 	
 	else
@@ -173,7 +181,7 @@ router.post('/loginconfirm', function(req, res, next) {
 			if(err) throw err;
 			if(result[0]['password']==='')
 			{
-				res.render('signup',{title:'*You have not yet registered, please fill below details to get registered'});
+				res.render('signup',{title:'*You have not yet registered, please fill below details to get registered', loglog: req.session.uname});
 			}
 			else
 			{
@@ -183,21 +191,24 @@ router.post('/loginconfirm', function(req, res, next) {
 					req.session.uname = result[0]["username"];
 					if(req.session.uname)
 					{
-						req.session.cookie.maxAge = 60000;// 1800000; //half an hour
-
-					    if(req.session.anspage !== undefined && req.session.anspage > 0)
+						req.session.cookie.maxAge = 1800000;// 1800000; //half an hour
+					    if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
 						{
 							req.flash('loginConfirmData',req.flash('checkSignInData'));
 							res.redirect("/questionforum/question_info/"+req.session.anspage);
 						}
-						else if(req.session.anspage === undefined)
+						else if(req.session.qfpage !== undefined && req.session.anspage === undefined && req.session.askpage === undefined)
 						{
-							res.redirect("/questionforum");
+							res.redirect('/questionforum');
 						}
-						else
+						else if(req.session.anspage === undefined && req.session.askpage === 1 && req.session.qfpage === undefined)
 						{
 							req.flash('loginConfirmData',req.flash('checkSignInData'));
 							res.redirect('/ask');
+						}
+						else
+						{
+							res.redirect("/questionforum");
 						}
 					}
 					else
@@ -208,7 +219,7 @@ router.post('/loginconfirm', function(req, res, next) {
 				}
 				else
 				{
-					res.render('login',{title:'*Looks like you have entered wrong password'});
+					res.render('login',{title:'*Looks like you have entered wrong password', loglog: req.session.uname});
 				}
 			}
 		});
@@ -222,7 +233,7 @@ router.post('/enterdata', function(req, res, next) {
 		if(err) throw err;
 		if(result.length===0)
 		{
-			res.render('signup',{title:'*The email address that you have entered did not match any account in the Database.'});
+			res.render('signup',{title:'*The email address that you have entered did not match any account in the Database.', loglog: req.session.uname});
 		}
 		else
 		{
@@ -238,18 +249,18 @@ router.post('/enterdata', function(req, res, next) {
 						if(err) throw err;
 
 						req.session.uname = refine(req.body.username);
-						res.render('clicktocontinue');
+						res.render('clicktocontinue',{loglog: req.session.uname});
 					});
 				}
 				else
 				{
-					res.render('signup',{title:'Username already exists, please choose a different username'});
+					res.render('signup',{title:'Username already exists, please choose a different username', loglog: req.session.uname});
 				}
 			});
 		}
 		else
 		{
-			res.render('login',{title:'User Already Exists! Login or choose another email id'});
+			res.render('login',{title:'User Already Exists! Login or choose another email id', loglog: req.session.uname});
 		}
 	});
 		}
@@ -259,27 +270,46 @@ router.post('/enterdata', function(req, res, next) {
 
 
 router.get('/clicktocontinue', function(req, res, next){
-	if(req.session.anspage !== undefined && req.session.anspage > 0)
+	if(req.session.uname)
 	{
-		res.redirect("/questionforum/question_info/"+req.session.anspage);
-	}
-	else if(req.session.anspage === undefined)
-	{
-		res.redirect("/questionforum");
+	 	if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
+		{
+			req.flash('loginConfirmData',req.flash('checkSignInData'));
+			res.redirect("/questionforum/question_info/"+req.session.anspage);
+		}
+		else if(req.session.anspage === undefined && req.session.askpage === undefined && req.session.qfpage === undefined)
+		{
+			res.redirect("/questionforum");
+		}
+		else if(req.session.askpage !== undefined && req.session.anspage === undefined && req.session.qfpage === undefined)
+		{
+			req.flash('loginConfirmData',req.flash('checkSignInData'));
+			res.redirect('/ask');
+		}
+		else
+		{
+			res.redirect("/questionforum");
+		}
 	}
 	else
 	{
-		res.redirect('/ask');
+		res.render('login',{loglog: req.session.uname});
 	}
 });
 
 
 router.get('/logout',(req,res) => {
-    req.session.destroy((err) => {
-        if(err) throw err;
-        res.redirect('/');
+	if(req.session.uname)
+	{
+    	req.session.destroy((err) => {
+        	if(err) throw err;
+        	res.redirect('/');
     });
-
+    }
+    else
+    {
+    	res.redirect('/');
+    }
 });
 
 

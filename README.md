@@ -70,7 +70,7 @@ In this project:
     create table questions(question_id int(11) not null auto_increment primary key, question varchar(15000) not null, username varchar(20) not null, title varchar(255) not null, qdate datetime not null);
     
 ### Answers table:
-    create table answers(answer_id int(11) not null, answer varchar(15000) not null, username varchar(20) not null, adate datetime not null, foreign key(answer_id) references questions(question_id));
+    create table answers(answer_id int(11) not null, answer varchar(15000) not null, username varchar(20) not null, adate datetime not null, foreign key(answer_id) references questions(question_id) on delete cascade on update cascade);
 
 # Various Modules used:
 cookie-parser - `npm install cookie-parser` (Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware.)

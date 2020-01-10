@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sql = require('mysql');
 var session = require('express-session');
+//var sanitizer = require('sanitizer');
 const bodyParser = require('body-parser');
 
 
@@ -170,7 +171,7 @@ router.post('/loginconfirm', function(req, res, next) {
 		if(err) throw err;
 		if(result.length===0)
 		{
-			res.render('login',{title:'*The email address that you have entered did not match any account in the Database.', loglog: req.session.uname});
+			res.render('login',{title:'*The email address that you have entered did not match any account in the Database. Please login again with correct credentials.', loglog: req.session.uname});
 		}
 	
 	else
@@ -180,7 +181,7 @@ router.post('/loginconfirm', function(req, res, next) {
 			if(err) throw err;
 			if(result[0]['password']==='')
 			{
-				res.render('signup',{title:'*You have not yet registered, please fill below details to get registered', loglog: req.session.uname});
+				res.render('signup',{title:'*You have not yet registered, please fill below details to get registered.', loglog: req.session.uname});
 			}
 			else
 			{
@@ -193,8 +194,16 @@ router.post('/loginconfirm', function(req, res, next) {
 						req.session.cookie.maxAge = 1800000;// 1800000; //half an hour
 					    if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
 						{
-							req.flash('loginConfirmData',req.flash('checkSignInData'));
-							res.redirect("/questionforum/question_info/"+req.session.anspage);
+							var temp1 = req.flash('checkSignInData');
+							if(temp1.length === 0)
+							{
+								res.redirect('/questionforum');
+							}
+							else
+							{
+								req.flash('loginConfirmData',temp1);
+							  	res.redirect("/questionforum/question_info/"+req.session.anspage);
+						    }
 						}
 						else if(req.session.qfpage !== undefined && req.session.anspage === undefined && req.session.askpage === undefined)
 						{
@@ -202,8 +211,16 @@ router.post('/loginconfirm', function(req, res, next) {
 						}
 						else if(req.session.anspage === undefined && req.session.askpage === 1 && req.session.qfpage === undefined)
 						{
-							req.flash('loginConfirmData',req.flash('checkSignInData'));
-							res.redirect('/ask');
+							var temp2 = req.flash('checkSignInData');
+							if(temp2.length === 0)
+							{
+								res.redirect('/questionforum');
+							}
+							else
+							{
+								req.flash('loginConfirmData',temp2);
+								res.redirect('/ask');
+							}
 						}
 						else
 						{
@@ -218,7 +235,7 @@ router.post('/loginconfirm', function(req, res, next) {
 				}
 				else
 				{
-					res.render('login',{title:'*Looks like you have entered wrong password', loglog: req.session.uname});
+					res.render('login',{title:'*Looks like you have entered wrong password, try again...', loglog: req.session.uname});
 				}
 			}
 		});
@@ -232,7 +249,7 @@ router.post('/enterdata', function(req, res, next) {
 		if(err) throw err;
 		if(result.length===0)
 		{
-			res.render('signup',{title:'*The email address that you have entered did not match any account in the Database.', loglog: req.session.uname});
+			res.render('signup',{title:'*The email address that you have entered did not match any account in the Database. Please register only CSE students.', loglog: req.session.uname});
 		}
 		else
 		{
@@ -253,13 +270,13 @@ router.post('/enterdata', function(req, res, next) {
 				}
 				else
 				{
-					res.render('signup',{title:'Username already exists, please choose a different username', loglog: req.session.uname});
+					res.render('signup',{title:'Username already exists, please choose a different username.', loglog: req.session.uname});
 				}
 			});
 		}
 		else
 		{
-			res.render('login',{title:'User Already Exists! Login or choose another email id', loglog: req.session.uname});
+			res.render('login',{title:'User Already Exists! Login or choose another email id.', loglog: req.session.uname});
 		}
 	});
 		}
@@ -273,8 +290,16 @@ router.get('/clicktocontinue', function(req, res, next){
 	{
 	 	if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
 		{
-			req.flash('loginConfirmData',req.flash('checkSignInData'));
-			res.redirect("/questionforum/question_info/"+req.session.anspage);
+			var temp1 = req.flash('checkSignInData');
+			if(temp1.length === 0)
+			{
+				res.redirect('/questionforum');
+			}
+			else
+			{
+				req.flash('loginConfirmData',temp1);
+				res.redirect("/questionforum/question_info/"+req.session.anspage);
+			}
 		}
 		else if(req.session.anspage === undefined && req.session.askpage === undefined && req.session.qfpage === undefined)
 		{
@@ -282,8 +307,16 @@ router.get('/clicktocontinue', function(req, res, next){
 		}
 		else if(req.session.askpage !== undefined && req.session.anspage === undefined && req.session.qfpage === undefined)
 		{
-			req.flash('loginConfirmData',req.flash('checkSignInData'));
-			res.redirect('/ask');
+			var temp2 = req.flash('checkSignInData');
+			if(temp2.length === 0)
+			{
+				res.redirect('/questionforum');
+			}
+			else
+			{
+				req.flash('loginConfirmData',temp2);
+				res.redirect('/ask');
+			}
 		}
 		else
 		{

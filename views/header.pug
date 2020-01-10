@@ -38,4 +38,7 @@ div.heading
 
     -if(logoutbtnable !== undefined)
       a(href="/logout")
-        button(type="button" id="askquestionid" style="padding: 10px 10px;float:right;cursor:pointer;border-radius:10px;border:none; background-color:red;" onmouseover="this.style.backgroundColor='#e60000'" onmouseout="this.style.backgroundColor='red';") logout (#{logoutbtnable}) 
+        button(type="button" id="logoutbtnid" style="padding: 10px 10px;float:right;cursor:pointer;border-radius:10px;border:none; background-color:red;" onmouseover="this.style.backgroundColor='#e60000'" onmouseout="this.style.backgroundColor='red';") logout (#{logoutbtnable}) 
+    -else
+      a(href="/login")
+        button(type="button" id="loginbtnid" style="padding: 10px 10px;float:right;cursor:pointer;border-radius:10px;border:none; background-color:green;" onmouseover="this.style.backgroundColor='#00cc00'" onmouseout="this.style.backgroundColor='green';") Login/Sign Up

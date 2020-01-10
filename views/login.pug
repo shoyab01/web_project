@@ -24,7 +24,6 @@ style.
 
 - var logoutbtnable = loglog
 include header
-h3(style="text-align:left; color:red;")=title
 
 form(method='POST' action='/loginconfirm')
   div.loginform
@@ -39,3 +38,4 @@ form(method='POST' action='/loginconfirm')
     button.btn.btn-primary(type='submit' style="background-color:#98e698; width:80%;font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#28a428'" onmouseout="this.style.backgroundColor='#98e698';") Login
     p Don't have an Account?  
       a(href="/signup") Sign Up now!
+    h3(style="text-align:left; color:red;")=title

@@ -16,7 +16,7 @@ style.
 
 - var logoutbtnable = loglog
 include header  
-h3(style="text-align:left; color:red;")=title      
+   
 form(method='POST' action='/enterdata')
            
   div.signupform
@@ -40,6 +40,8 @@ form(method='POST' action='/enterdata')
     br
 
     input(type='submit',name="submit",value='submit',id="submit" style="background-color:#98e698; width:80%;font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#28a428'" onmouseout="this.style.backgroundColor='#98e698';" disabled)
+
+    h3(style="text-align:left; color:red;")=title  
           
   script
     include ../public/javascripts/check.js

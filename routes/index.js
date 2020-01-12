@@ -191,17 +191,17 @@ router.post('/loginconfirm', function(req, res, next) {
 					req.session.uname = result[0]["username"];
 					if(req.session.uname)
 					{
+						var temp = req.flash('checkSignInData');
 						req.session.cookie.maxAge = 1800000;// 1800000; //half an hour
 					    if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
 						{
-							var temp1 = req.flash('checkSignInData');
-							if(temp1.length === 0)
+							if(temp.length === 0)
 							{
 								res.redirect('/questionforum');
 							}
 							else
 							{
-								req.flash('loginConfirmData',temp1);
+								req.flash('loginConfirmData',temp);
 							  	res.redirect("/questionforum/question_info/"+req.session.anspage);
 						    }
 						}
@@ -211,14 +211,13 @@ router.post('/loginconfirm', function(req, res, next) {
 						}
 						else if(req.session.anspage === undefined && req.session.askpage === 1 && req.session.qfpage === undefined)
 						{
-							var temp2 = req.flash('checkSignInData');
-							if(temp2.length === 0)
+							if(temp.length === 0)
 							{
 								res.redirect('/questionforum');
 							}
 							else
 							{
-								req.flash('loginConfirmData',temp2);
+								req.flash('loginConfirmData',temp);
 								res.redirect('/ask');
 							}
 						}
@@ -288,16 +287,16 @@ router.post('/enterdata', function(req, res, next) {
 router.get('/clicktocontinue', function(req, res, next){
 	if(req.session.uname)
 	{
+		var temp = req.flash('checkSignInData');
 	 	if(req.session.anspage > 0 && req.session.askpage === undefined && req.session.qfpage === undefined)
 		{
-			var temp1 = req.flash('checkSignInData');
-			if(temp1.length === 0)
+			if(temp.length === 0)
 			{
 				res.redirect('/questionforum');
 			}
 			else
 			{
-				req.flash('loginConfirmData',temp1);
+				req.flash('loginConfirmData',temp);
 				res.redirect("/questionforum/question_info/"+req.session.anspage);
 			}
 		}
@@ -307,14 +306,13 @@ router.get('/clicktocontinue', function(req, res, next){
 		}
 		else if(req.session.askpage !== undefined && req.session.anspage === undefined && req.session.qfpage === undefined)
 		{
-			var temp2 = req.flash('checkSignInData');
-			if(temp2.length === 0)
+			if(temp.length === 0)
 			{
 				res.redirect('/questionforum');
 			}
 			else
 			{
-				req.flash('loginConfirmData',temp2);
+				req.flash('loginConfirmData',temp);
 				res.redirect('/ask');
 			}
 		}

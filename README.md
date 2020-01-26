@@ -35,7 +35,7 @@ nodemon automatically restarts your app whenever you save your files.
 
 Install nodemon:
 
-    C:\>npm install -g nodemon (for global installation)
+    C:\>npm install -g nodemon
     
 ### nodemon usage:
 instead of typing:

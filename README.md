@@ -12,21 +12,21 @@ Or just follow below steps:
     
     C:\>npm install -g express-generator
     
-    C:\>express --view=pug myApp
+    C:\>express --view=pug web_project
     
-    C:\>cd myApp
+    C:\>cd web_project
     
-    C:\>npm install
+    C:\web_project>npm install
     
-    C:\>set DEBUG=myApp:* np start
+    C:\web_project>set DEBUG=myApp:* np start
     
 Then load http://localhost:3000/ in your browser to access the app
 
 For starting your app in browser after editing the code:
 
-    C:\>cd myApp
+    C:\>cd web_project
     
-    C:\myApp>npm start
+    C:\web_project>npm start
   
 Then load http://localhost:3000/ in your browser to access the app
 
@@ -40,11 +40,11 @@ Install nodemon:
 ### nodemon usage:
 instead of typing:
 
-    C:\myApp>npm start
+    C:\web_project>npm start
 
 ### just type:
 
-    C:\myApp>nodemon
+    C:\web_project>nodemon
     
 Then load http://localhost:3000/ in your browser to access the app
 

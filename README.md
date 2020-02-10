@@ -20,7 +20,7 @@ follow below steps:
     
     C:\web_project>npm install
     
-    C:\web_project>set DEBUG=myApp:* np start
+    C:\web_project>set DEBUG=web_project:* np start
 
 ### Starting your app in browser:
 

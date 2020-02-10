@@ -6,7 +6,9 @@ In this project initially user will see the questions displayed in the question 
 # express generator
 Install express generator from this site -> https://expressjs.com/en/starter/generator.html
 
-Or just follow below steps:
+Or 
+
+follow below steps:
 
     C:\>npx express-generator
     
@@ -19,10 +21,8 @@ Or just follow below steps:
     C:\web_project>npm install
     
     C:\web_project>set DEBUG=myApp:* np start
-    
-Then load http://localhost:3000/ in your browser to access the app
 
-For starting your app in browser after editing the code:
+### Starting your app in browser:
 
     C:\>cd web_project
     

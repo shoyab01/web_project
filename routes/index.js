@@ -7,22 +7,22 @@ const bodyParser = require('body-parser');
 
 
 
-const conn = sql.createConnection({
+/*const conn = sql.createConnection({
 	host:'localhost',
 	user:'dev',
 	password:'password',
 	database:'sample'	
-});
+});*/
 
 
 //mysql://dqvjfb9gmkqnw829:i7xt5crtciwqvy9i@gi6kn64hu98hy0b6.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/zulge2g5gqxsmdoh // JAWSDB_URL
 
-/*const conn = sql.createConnection({
+const conn = sql.createConnection({
 	host:'gi6kn64hu98hy0b6.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
 	user:'dqvjfb9gmkqnw829',
 	password:'i7xt5crtciwqvy9i',
 	database:'zulge2g5gqxsmdoh'	
-});*/
+});
 
 
 function checkSignIn(req,res,next){

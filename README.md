@@ -1,6 +1,8 @@
 # web_project
 cse question forum using express generator frame work, node.js, pug
 
+This project is created for education purpose for students to make lessons more engaging, entertaining, or easier
+to understand.
 In this project initially user will see the questions displayed in the question forum. If he wants to ask a question through this forum he has to login by providing his email address and password to ask his/her question. The question will be visible to everyone. Similarly if the user wants to answer a question in cse question forum, he/she has to login and answer and it will be visible to everyone. This way everyone can clear their doubts without actually meeting in person.
 
 # express generator

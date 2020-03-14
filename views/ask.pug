@@ -1,7 +1,7 @@
 style.
   .askquestion{
   text-align:center;
-  background-color:#ccfff5;
+  background-color:#e6e6e6;
   padding:1px;
   margin-left:250px;
   margin-right:250px;
@@ -32,24 +32,28 @@ style.
   border-color:#ff4d4d;
   outline:none;
   }
+  .askback {
+  background-color:#808080;
+  }
 
 - var logoutbtnable = loglog
 include header
 
-form(method='POST' action='/questionforum/postquestion')
-  div.askquestion
-    h1 Ask a public question
-    div.title
-      h3 Title 
-      p Be specific and imagine you're asking a question to another person
-        input(type="text" id="title" name="title" size="100" maxlength="100" tabindex="100" value=titleAsk data-min-length="15" data-max-length="150"  autocomplete="off", required)
+div.askback
+  form(method='POST' action='/questionforum/postquestion')
+    div.askquestion
+      h1(style="font-style: oblique; font-size:3vw;") Ask a public question
+      div.title
+        h3(style="font-style: oblique;") Title 
+        p Be specific and imagine you're asking a question to another person
+          input(type="text" id="title" name="title" size="100" maxlength="100" tabindex="100" value=titleAsk data-min-length="15" data-max-length="150"  autocomplete="off", required)
 
-    br
+      br
 
-    div.body
-      h3 Body
-      p Include all the information someone would need to answer your question
-        textarea(type="text" id="body" name="body" style="height: 200px" rows="1" cols="100" autocomplete="off", required) #{bodyAsk}
-         
-  div.postquestionbutton
-    input(type='submit',name="postques",value='Post Question',id="postques" style="background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")
+      div.body
+        h3(style="font-style: oblique;") Body
+        p Include all the information someone would need to answer your question
+          textarea(type="text" id="body" name="body" style="height: 200px" rows="1" cols="100" autocomplete="off", required) #{bodyAsk}
+           
+      div.postquestionbutton
+        input(type='submit',name="postques",value='Post Question',id="postques" style="font-style: oblique; background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")

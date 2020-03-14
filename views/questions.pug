@@ -35,4 +35,4 @@ div.questionforum
   -for(var i = data.length-1; i >= 0; i-- )
     -var url=String(data[i]["title"])
     div.question 
-      p: p(style="text-align:center; overflow:auto;word-wrap: break-word;") #[a(href="/questionforum/question_info/" + data[i]["question_id"]) #{url}]
+      p: p(style="text-align:center; font-style: oblique; overflow:auto;word-wrap: break-word;") #[a(href="/questionforum/question_info/" + data[i]["question_id"]) #{url}]

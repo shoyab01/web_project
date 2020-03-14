@@ -1,9 +1,23 @@
 style.
   .startbutton{
   text-align:center;
-  padding:250px;
+  padding:300px;
   }
 
+  .developer{
+    position:absolute;                  
+    bottom:0;                          
+    left:0;
+    background:url('./images/lightgal.jpg');
+    border-radius: 30px;
+  }
+
+include body
 div.startbutton
   a(href="/questionforum")
-    button(type="button",style="background-color:#668cff;font-size:17px; border-radius:10px; border:none;cursor:pointer;padding:15px 30px;"  onmouseover="this.style.backgroundColor='#3366ff'" onmouseout="this.style.backgroundColor='#668cff';") CSE Question Forum
+    button(type="button",style="font-style: oblique; background-color:#ffd24d;font-size:17px; border-radius:10px; border:none;cursor:pointer;padding:15px 30px;"  onmouseover="this.style.backgroundColor='#ffbf00'" onmouseout="this.style.backgroundColor='#ffd24d';") Question Forum
+
+div.developer
+  h2(style="text-decoration: underline; color:#cccccc;") Developer:
+   h3(style="text-indent:100px; color:#a6a6a6;") Shoyab Azmal
+   h3(style="text-indent:100px; color:#a6a6a6;") coe17b006@iiitk.ac.in

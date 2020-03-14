@@ -1,7 +1,7 @@
 style.
   .questiontitle{
   text-align:center;
-  background-color:#eeccff;
+  background-color:#e6e6e6;
   padding:1px;
   margin-left:90px;
   margin-right:90px;
@@ -33,26 +33,30 @@ style.
   text-align:center;
   }
 
+  .qiback {
+  background-color:#808080;
+  }
+
 
 - var logoutbtnable = loglog
-include header
+include header2
 
-form(method='POST' action="/questionforum/question_info/postanswer/" + data3)
+div.qiback
 
   div.questiontitle
-    h1(style="overflow-x:auto;overflow-y:auto;word-wrap: break-word;")=title
+    h1(style="overflow-x:auto;overflow-y:auto;word-wrap: break-word;font-style: oblique;")=title
     -var qqdate = String(data1[0]["qdate"]).slice(4,15);
     -var qqtime = String(data1[0]["qdate"]).slice(16,21);
     p(style="text-align:right;color:#737373;font-size:small;") #{qqdate} at #{qqtime}
     p(style="text-align:right;color:#737373;font-size:small;") #{String(data1[0]["username"])}
     
     div.question
-      p(style="text-align:left;padding:0px 25px; overflow-x:auto; overflow-y:auto;word-wrap: break-word;") #{String(data1[0]["question"])}
+      p(style="font-style: oblique; text-align:left;padding:0px 25px; overflow-x:auto; overflow-y:auto;word-wrap: break-word;") #{String(data1[0]["question"])}
 
     
     br
     br
-  
+
     -if(data2.length !== 0)
       -if(data2.length === 1)
         h2(style="text-align:left; border-bottom-style:solid; border-color:#c2c2a3; border-width:0.5px; margin-left:50px; margin-right:50px;") 1 Answer
@@ -67,11 +71,13 @@ form(method='POST' action="/questionforum/question_info/postanswer/" + data3)
           p(style="text-align:right;color:#737373;font-size:small;") #{data2[i]["username"]}   
     -else
       p Be the first to answer this question
-    h3(style="text-align:left;margin-left:50px; margin-right:50px;") Your Answer :
-      
-    div.answerbodyinput
-      textarea(type="text" id="answerbody" name="answerbody" style="height: 150px" rows="1" cols="100" autocomplete="off",required) #{PostAnswer}
-         
-    br
-  div.postyouranswerbutton
-    input(type='submit',name="answerbodysubmit",value='Post Your Answer',id="answerbodysubmit" style="background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")
+    h3(style="text-align:left;margin-left:50px; margin-right:50px;font-style: oblique;") Your Answer :
+
+
+    form(method='POST' action="/questionforum/question_info/postanswer/" + data3)    
+      div.answerbodyinput
+        textarea(type="text" id="answerbody" name="answerbody" style="font-style: oblique;height: 150px" rows="1" cols="100" autocomplete="off",required) #{PostAnswer}
+           
+      br
+      div.postyouranswerbutton
+        input(type='submit',name="answerbodysubmit",value='Post Your Answer',id="answerbodysubmit" style="font-style: oblique;background-color:#c3c388; font-size:17px; border-radius:10px; border:none; cursor:pointer;padding:10px 5px;" onmouseover="this.style.backgroundColor='#aaaa55'" onmouseout="this.style.backgroundColor='#c3c388';")

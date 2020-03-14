@@ -64,7 +64,7 @@ div.qiback
         h2(style="text-align:left; border-bottom-style:solid; border-color:#c2c2a3; border-width:0.5px; margin-left:50px; margin-right:50px;") #{data2.length} Answers
       -for(var i = data2.length-1; i >= 0; i--)
         div.availableanswers
-          p(style="text-align:left; padding:0px 10px;word-wrap: break-word;") #{data2[i]["answer"]}
+          p(style="text-align:left; padding:0px 10px;word-wrap: break-word;font-style:oblique;") #{data2[i]["answer"]}
           -var aadate = String(data2[i]["adate"]).slice(4,15);
           -var aatime = String(data2[i]["adate"]).slice(16,21);
           p(style="text-align:right;color:#737373;font-size:small;") #{aadate} at #{aatime}

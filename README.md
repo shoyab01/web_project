@@ -92,4 +92,6 @@ Flash messages are stored in the session. First, setup sessions as usual by enab
 
 # Link to Website:
 
+Hosted/Deployed on Heroku platform
+
 https://cseqstnfrm.herokuapp.com/
